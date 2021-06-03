@@ -8,7 +8,7 @@ import librosa.display
 import IPython.display as ipd
 import sklearn
 
-audio_fpath = 'music/fileCut/Mèo/'
+audio_fpath = '../music/fileCut/Mèo/'
 audio_clips = os.listdir(audio_fpath)
 print("No. of .wav files in audio folder = ",len(audio_clips))
 # sr = librosa.core.get_samplerate(audio_fpath+audio_clips[0]) Ham lay mau sr
