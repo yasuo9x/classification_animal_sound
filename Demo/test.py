@@ -20,12 +20,13 @@ plt.figure(figsize=(14, 5))
 librosa.display.waveplot(x, sr=sr)
 plt.title('Visualizing Audio')
 
-X = librosa.stft(x)
-Xdb = librosa.amplitude_to_db(abs(X))
-plt.figure(figsize=(14, 5))
-librosa.display.specshow(Xdb, sr=sr, x_axis='time', y_axis='log')
-plt.title('Spectrogram')
-plt.colorbar()
+
+# X = librosa.stft(x)
+# Xdb = librosa.amplitude_to_db(abs(X))
+# plt.figure(figsize=(14, 5))
+# librosa.display.specshow(Xdb, sr=sr, x_axis='time', y_axis='log')
+# plt.title('Spectrogram')
+# plt.colorbar()
 
 # import numpy as np
 # sr = 22050 # sample rate
