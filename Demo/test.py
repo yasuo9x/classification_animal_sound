@@ -1,62 +1,62 @@
 import os
 import time
+import numpy
+import scipy
+import pandas
+import sklearn
+import seaborn
+import matplotlib
 import matplotlib.pyplot as plt
-
 import librosa
 import librosa.display
-
 import IPython.display as ipd
-import sklearn
-
-audio_fpath = '../music/fileCut/Mèo/'
+from sklearn import neighbors,datasets
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+FRAME_SIZE = 2048
+HOP_LENGTH = 512
+audio_fpath = ('../music/fileCut/Cho soi/')  
 audio_clips = os.listdir(audio_fpath)
+x = []
 print("No. of .wav files in audio folder = ",len(audio_clips))
-# sr = librosa.core.get_samplerate(audio_fpath+audio_clips[0]) Ham lay mau sr
-x, sr = librosa.load(audio_fpath+audio_clips[0]) ### Co lay sample rate nhung lai theo cach khac can phai sua lai cach load
-# print(type(x), type(sr))
-# print(x.shape, sr)
-y = ipd.Audio(audio_fpath+audio_clips[0])
-plt.figure(figsize=(14, 5))
-librosa.display.waveplot(x, sr=sr)
-plt.title('Visualizing Audio')
+for index in range(0,len(audio_clips)) :
+    tmp,sr = librosa.load(audio_fpath+audio_clips[index],44100)
+    x.append(tmp)    
+print(sr) # mac dinh sr = 44100Hz sample rate
+zcrs = []
+for index in x :
+    tmp = librosa.feature.zero_crossing_rate(index)[0]
+    zcrs.append(tmp)
+# for index in zcrs :
+#     print(index.size)
+data = zcrs[:11]
+test = [zcrs[11]]
+target_data = range(len(data))
+# clf = neighbors.KNeighborsClassifier(n_neighbors=1,p=2)
+print(list(target_data))
+#X_train, X_test, y_train, y_test = train_test_split(data,target,test_size = )
+clf = neighbors.KNeighborsClassifier(n_neighbors=11,p=2)
+clf.fit(data,target_data)
+y_pred = clf.predict(test)
+print(100*accuracy_score([0],y_pred))
+# print(librosa.get_duration(x, sr))
+# # Hiển thị tín hiểu của file âm thanh
+# plt.figure(figsize=(12,5))
+# plt.grid()
+# librosa.display.waveplot(x,sr=sr)
 
-
-# X = librosa.stft(x)
-# Xdb = librosa.amplitude_to_db(abs(X))
+# zcr_x = librosa.feature.zero_crossing_rate(x)[0]
+# zcr_x2 = librosa.feature.zero_crossing_rate(x2)[0]
+# print(zcr_x.size) 
+# print(zcr_x2.size)
 # plt.figure(figsize=(14, 5))
-# librosa.display.specshow(Xdb, sr=sr, x_axis='time', y_axis='log')
-# plt.title('Spectrogram')
-# plt.colorbar()
+# plt.plot(zcr_x)
+# plt.plot(zcr_x2)
+# plt.grid()
 
-# import numpy as np
-# sr = 22050 # sample rate
-# T = 5.0    # seconds
-# t = np.linspace(0, T, int(T*sr), endpoint=False) # time variable
-# x = 0.5*np.sin(2*np.pi*220*t)# pure sine wave at 220 Hz
-# #Playing the audio
-# ipd.Audio(x, rate=sr) # load a NumPy array
-# #Saving the audio
-# librosa.output.write_wav('tone_220.wav', x, sr)
+# # print(zcr_x)
+# # print(zcrs2)
+# # ham hien thi
+# plt.show()
 
-spectral_centroids = librosa.feature.spectral_centroid(x, sr=sr)[0]
-spectral_centroids.shape
-# Computing the time variable for visualization
-plt.figure(figsize=(12, 4))
-frames = range(len(spectral_centroids))
-t = librosa.frames_to_time(frames)
-# Normalising the spectral centroid for visualisation
-def normalize(x, axis=0):
-    return sklearn.preprocessing.minmax_scale(x, axis=axis)
-#Plotting the Spectral Centroid along the waveform
-librosa.display.waveplot(x, sr=sr, alpha=0.4)
-plt.plot(t, normalize(spectral_centroids), color='b')
-plt.title('Spectral Centroid')
-
-spectral_rolloff = librosa.feature.spectral_rolloff(x+0.01, sr=sr)[0]
-plt.figure(figsize=(12, 4))
-librosa.display.waveplot(x, sr=sr, alpha=0.4)
-plt.plot(t, normalize(spectral_rolloff), color='r')
-plt.title('Spectral Rolloff')
-
-plt.show()
 
