@@ -20,10 +20,17 @@ audio_clips_1 = os.listdir(audio_fpath_1)
 
 audio_fpath_2 = ('../music/fileCut/Mèo/')
 audio_clips_2 = os.listdir(audio_fpath_2)
+
+audio_fpath_3 = ('../music/fileCut/Bò/')
+audio_clips_3 = os.listdir(audio_fpath_3)
+
+
 x_1 = [] # lay chuyen du lieu audio vao mang
 x_2 = []
+x_3 = []
 # print("No. of .wav files in audio folder = ",len(audio_clips_1))
 # print("No. of .wav files in audio folder = ",len(audio_clips_2))
+# print("No. of .wav files in audio folder = ",len(audio_clips_3))
 for index in range(0,len(audio_clips_1)) :
     tmp,sr = librosa.load(audio_fpath_1+audio_clips_1[index],44100)
     x_1.append(tmp)    
@@ -32,12 +39,17 @@ for index in range(0,len(audio_clips_2)) :
     tmp,sr = librosa.load(audio_fpath_2+audio_clips_2[index],44100)
     x_2.append(tmp)    
 
+for index in range(0,len(audio_clips_3)) :
+    tmp,sr = librosa.load(audio_fpath_3+audio_clips_3[index],44100)
+    x_3.append(tmp)
+
 # print(len(x_1))
 # print(len(x_2))
 # print(sr) # mac dinh sr = 44100Hz sample rate
 
 zcrs_1 = [] # mang chua các phần tử của 1 video có zero crossing
 zcrs_2 = []
+zcrs_3 = []
 
 for index in x_1 :
     tmp_1 = librosa.feature.zero_crossing_rate(index)[0]
@@ -47,16 +59,22 @@ for index in x_2 :
     tmp_2 = librosa.feature.zero_crossing_rate(index)[0]
     zcrs_2.append(tmp)
 
+for index in x_3 :
+    tmp_3 = librosa.feature.zero_crossing_rate(index)[0]
+    zcrs_3.append(tmp)
+
 # for index in zcrs :
 #     print(index.size)
 
-data_1 = zcrs_1[1:12] # cho soi
+data_1 = zcrs_1[0:6] + zcrs_1[7:12] # cho soi
 data_2 = zcrs_2 # meo
-test = [zcrs_1[0]]
+data_3 = zcrs_3
+test = [zcrs_1[6]]
 # print(test)
 target_data_1 = numpy.array([0] * 11) # gan nhan cho bo data train
 target_data_2 = numpy.array([1] * 13)
-print(target_data_1)
+target_data_3 = numpy.array([2] * 13)
+
 #target_data_test = [0] Gan nhan cho bo data test thu
 # clf = neighbors.KNeighborsClassifier(n_neighbors=1,p=2)
 # print(list(target_data_1))
