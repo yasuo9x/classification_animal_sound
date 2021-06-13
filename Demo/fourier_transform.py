@@ -18,7 +18,7 @@ x, sr = librosa.load(audio_fpath+audio_clips[1],44100)
 print(audio_clips[4])
 print(sr) # mac dinh sr = 441000 sample rate
 print(x.shape)
-print(librosa.get_duration(x, sr)) # ham lay thoi gian cua audio nhe
+ # ham lay thoi gian cua audio nhe
 # Hiển thị tín hiểu của file âm thanh
 plt.figure(figsize=(14,5))
 plt.grid()
