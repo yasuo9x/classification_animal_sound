@@ -15,74 +15,68 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 FRAME_SIZE = 2048
 HOP_LENGTH = 512
+import os
+import time
+import numpy
+import scipy
+import pandas
+import sklearn
+import seaborn
+import matplotlib
+import matplotlib.pyplot as plt
+import librosa
+import librosa.display
+import IPython.display as ipd 
+from sklearn import neighbors,datasets
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+
+# audio_fpath = ('../music/fileCut/Bo/')
+# audio_fpath = ('../music/fileCut/CaSau/')
+# audio_fpath = ('../music/fileCut/ChoSoi/')  
+# audio_fpath = ('../music/fileCut/Chuot/')
+# audio_fpath = ('../music/fileCut/Ho/')
+# audio_fpath = ('../music/fileCut/Huou/')
+# audio_fpath = ('../music/fileCut/Meo/')
+# audio_fpath = ('../music/fileCut/Ngựa/')
+# audio_fpath = ('../music/fileCut/Voi/')
+# audio_fpath = ('../music/fileCut/Vuon/')
+
+audio_fpath_x = '../music/fileCut/'
+audio_fpath_y = os.listdir(audio_fpath_x)
+data = numpy.array([])
+target_data = numpy.array([])
+for index in range(0,len(audio_fpath_y)) :
+    audio_fpath_z = os.listdir(audio_fpath_x + audio_fpath_y[index])
+    x = []
+    for index_x in range(0,len(audio_fpath_z)) :
+        tmp, sr = librosa.load(audio_fpath_x + audio_fpath_y[index] + '/'+ audio_fpath_z[index_x] , 44100)
+        x.append(tmp)
+    zcrs = []
+    for index_y in x :
+        tmp = librosa.feature.zero_crossing_rate(index_y)[0]
+        tmp = tmp[:250]
+        zcrs.append(tmp)
+    data_tmp = numpy.array(zcrs)
+    if(data.size == 0 ) : 
+        data = numpy.array(data_tmp)
+    else :
+        data = numpy.concatenate((data,data_tmp))
+    if(target_data.size == 0 ) :
+        target_data = numpy.array([index] * len(audio_fpath_z))
+    else :
+        target_data = numpy.append(target_data,[index] * len(audio_fpath_z))
+    
+
 audio_fpath_1 = ('../music/fileCut/ChoSoi/')  
 audio_clips_1 = os.listdir(audio_fpath_1)
-
-audio_fpath_2 = ('../music/fileCut/Meo/')
-audio_clips_2 = os.listdir(audio_fpath_2)
-
-audio_fpath_3 = ('../music/fileCut/Bo/')
-audio_clips_3 = os.listdir(audio_fpath_3)
-
-
-x_1 = [] # lay chuyen du lieu audio vao mang
-x_2 = []
-x_3 = []
-
-for index in range(0,len(audio_clips_1)) :
-    tmp,sr = librosa.load(audio_fpath_1+audio_clips_1[index],44100)
-    x_1.append(tmp)    
-
-for index in range(0,len(audio_clips_2)) :
-    tmp,sr = librosa.load(audio_fpath_2+audio_clips_2[index],44100)
-    x_2.append(tmp)    
-
-for index in range(0,len(audio_clips_3)) :
-    tmp,sr = librosa.load(audio_fpath_3+audio_clips_3[index],44100)
-    x_3.append(tmp)
-
-zcrs_1 = [] # mang chua các phần tử của 1 video có zero crossing
-zcrs_2 = []
-zcrs_3 = []
-for index in x_1 :
-    tmp_1 = librosa.feature.zero_crossing_rate(index)[0]
-    tmp_1 = tmp_1[:250]
-    zcrs_1.append(tmp_1)
-
-for index in x_2 :
-    tmp_2 = librosa.feature.zero_crossing_rate(index)[0]
-    tmp_2 = tmp_2[:250]
-    zcrs_2.append(tmp_2)
-
-
-for index in x_3 :
-    tmp_3 = librosa.feature.zero_crossing_rate(index)[0]
-    tmp_3 = tmp_3[:250]
-    zcrs_3.append(tmp_3)
-
-
-zcrs_x1 = numpy.array(zcrs_1)
-zcrs_x2 = numpy.array(zcrs_2)
-zcrs_x3 = numpy.array(zcrs_3)
-print(zcrs_x1.shape)
-print(zcrs_x2.shape)
-print(zcrs_x3.shape)
-
-zcrs = numpy.concatenate((zcrs_x1,zcrs_2))
-zcrs = numpy.concatenate((zcrs,zcrs_x3))
-
-test = numpy.array([zcrs_1[0]])
-
-# print(len(data))
-# print(test)
-# target_data_1 = numpy.array([0] * 12) # gan nhan cho bo data train
-# target_data_2 = numpy.array([1] * 13)
-# target_data_3 = numpy.array([2] * 12)
-
-target_zcrs = numpy.array([0] * 13 + [1] * 14 + [2] * 12)
+x, sr = librosa.load(audio_fpath_1+audio_clips_1[0],44100)
+tmp_1 = librosa.feature.zero_crossing_rate(x)[0]
+tmp_1 = tmp_1[:250]
+test = numpy.array([tmp_1])
 
 clf = neighbors.KNeighborsClassifier(n_neighbors=10,p=2,weights='distance')
-clf.fit(zcrs,target_zcrs)
+clf.fit(data,target_data)
 y = clf.kneighbors(test)
 y_pred = clf.predict(test) # du doan lay nhan cua data moi
 
