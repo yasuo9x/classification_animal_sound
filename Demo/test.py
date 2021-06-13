@@ -78,15 +78,6 @@ print(zcrs_x3.shape)
 zcrs = numpy.concatenate((zcrs_x1,zcrs_2))
 zcrs = numpy.concatenate((zcrs,zcrs_x3))
 
-# print(type(zcrs))
-# print(zcrs.shape)
-
-# data = numpy.asarray(zcrs_1)
-# print(type(data))
-# # print(data)
-# data_1 = zcrs_1[1:12] # cho soi
-# data_2 = zcrs_2 # meo
-# data_3 = zcrs_3
 test = numpy.array([zcrs_1[0]])
 
 # print(len(data))
@@ -96,13 +87,7 @@ test = numpy.array([zcrs_1[0]])
 # target_data_3 = numpy.array([2] * 12)
 
 target_zcrs = numpy.array([0] * 11 + [1] * 12 + [2] * 11)
-# #print(target_data)
-# #target_data_test = [0] Gan nhan cho bo data test thu
-# # clf = neighbors.KNeighborsClassifier(n_neighbors=1,p=2)
-# # print(list(target_data_1))
-# # print(list(target_data_2))
 
-# # X_train, X_test, y_train, y_test = train_test_split(data,target,test_size = )
 clf = neighbors.KNeighborsClassifier(n_neighbors=10,p=2) #
 clf.fit(zcrs,target_zcrs)
 y = clf.kneighbors(test)
@@ -111,25 +96,4 @@ y_pred = clf.predict(test) # du doan lay nhan cua data moi
 
 print(y)
 print(y_pred)
-
-# print(librosa.get_duration(x, sr))
-# # Hiển thị tín hiểu của file âm thanh
-# plt.figure(figsize=(12,5))
-# plt.grid()
-# librosa.display.waveplot(x,sr=sr)
-
-# zcr_x = librosa.feature.zero_crossing_rate(x)[0]
-# zcr_x2 = librosa.feature.zero_crossing_rate(x2)[0]
-# print(zcr_x.size) 
-# print(zcr_x2.size)
-# plt.figure(figsize=(14, 5))
-# plt.plot(zcr_x)
-# plt.plot(zcr_x2)
-# plt.grid()
-
-# # print(zcr_x)
-# # print(zcrs2)
-# # ham hien thi
-# plt.show()
-
 
