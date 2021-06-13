@@ -31,18 +31,18 @@ from sklearn import neighbors,datasets
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 
-# audio_fpath = ('../music/fileCut/Bo/')
-# audio_fpath = ('../music/fileCut/CaSau/')
-# audio_fpath = ('../music/fileCut/ChoSoi/')  
-# audio_fpath = ('../music/fileCut/Chuot/')
-# audio_fpath = ('../music/fileCut/Ho/')
-# audio_fpath = ('../music/fileCut/Huou/')
-# audio_fpath = ('../music/fileCut/Meo/')
-# audio_fpath = ('../music/fileCut/Ngựa/')
-# audio_fpath = ('../music/fileCut/Voi/')
-# audio_fpath = ('../music/fileCut/Vuon/')
+# audio_fpath = ('../audio/Bo/')
+# audio_fpath = ('../audio/CaSau/')
+# audio_fpath = ('../audio/ChoSoi/')  
+# audio_fpath = ('../audio/Chuot/')
+# audio_fpath = ('../audio/Ho/')
+# audio_fpath = ('../audio/Huou/')
+# audio_fpath = ('../audio/Meo/')
+# audio_fpath = ('../audio/Ngựa/')
+# audio_fpath = ('../audio/Voi/')
+# audio_fpath = ('../audio/Vuon/')
 
-audio_fpath_x = '../music/fileCut/'
+audio_fpath_x = '../audio/'
 audio_fpath_y = os.listdir(audio_fpath_x)
 data = numpy.array([])
 target_data = numpy.array([])
@@ -68,7 +68,7 @@ for index in range(0,len(audio_fpath_y)) :
         target_data = numpy.append(target_data,[index] * len(audio_fpath_z))
     
 
-audio_fpath_1 = ('../music/fileCut/ChoSoi/')  
+audio_fpath_1 = ('../audio/ChoSoi/')  
 audio_clips_1 = os.listdir(audio_fpath_1)
 x, sr = librosa.load(audio_fpath_1+audio_clips_1[0],44100)
 tmp_1 = librosa.feature.zero_crossing_rate(x)[0]

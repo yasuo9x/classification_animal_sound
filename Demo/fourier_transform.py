@@ -11,7 +11,7 @@ import librosa
 import librosa.display
 import IPython.display as ipd
 
-audio_fpath = '../music/fileCut/Cho soi/'
+audio_fpath = '../audio/Cho soi/'
 audio_clips = os.listdir(audio_fpath)
 print("No. of .wav files in audio folder = ",len(audio_clips))
 x, sr = librosa.load(audio_fpath+audio_clips[1],44100)
