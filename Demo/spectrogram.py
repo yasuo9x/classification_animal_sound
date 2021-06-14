@@ -11,7 +11,7 @@ import librosa
 import librosa.display
 import IPython.display as ipd
 
-audio_fpath = '../audio/Cho soi/'
+audio_fpath = '../audio/ChoSoi/'
 audio_clips = os.listdir(audio_fpath)
 print("No. of .wav files in audio folder = ",len(audio_clips))
 x, sr = librosa.load(audio_fpath+audio_clips[1],44100)
@@ -20,6 +20,17 @@ print(sr) # mac dinh sr = 441000 sample rate
 print(x.shape)
 print(librosa.get_duration(x, sr)) # ham lay thoi gian cua audio nhe
 # Hiển thị tín hiểu của file âm thanh
-plt.figure(figsize=(14,5))
+X = librosa.stft(x)
+Xdb = librosa.amplitude_to_db(abs(X))
+plt.figure(figsize=(14, 5))
+librosa.display.specshow(Xdb, sr=sr, x_axis='time', y_axis='log')
+plt.colorbar(format='%+2.0f dB')
 plt.grid()
-librosa.display.waveplot(x,sr=sr)
+
+print(type(X))
+print(X)
+print(X.shape)
+print(type(Xdb))
+print(Xdb)
+print(Xdb.shape)
+plt.show()
