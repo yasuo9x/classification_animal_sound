@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 import librosa
 import librosa.display
 import IPython.display as ipd 
-audio_fpath = ('../music/fileCut/Cho soi/')  
+audio_fpath = ('../audio/ChoSoi/')  
 # audio_fpath = '../music/fileCut/Mèo/'
 audio_clips = os.listdir(audio_fpath)
 print("No. of .wav files in audio folder = ",len(audio_clips))
