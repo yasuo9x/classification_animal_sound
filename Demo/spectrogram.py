@@ -48,7 +48,7 @@ test_1 = numpy.reshape(Xdb_1,(1,256250))
 
 target_data = numpy.array([0] * 10)
 
-clf = neighbors.KNeighborsClassifier(n_neighbors=9,p=2,weights='distance')
+clf = neighbors.KNeighborsClassifier(n_neighbors=6,p=2,weights='distance')
 clf.fit(data,target_data)
 y = clf.kneighbors(test_1)
 y_pred = clf.predict(test_1) # du doan lay nhan cua data moi

@@ -59,8 +59,8 @@ print(data)
 
 audio_fpath = '../audio_test/'
 audio_clips = os.listdir(audio_fpath)
-tmp_1, sr = librosa.load(audio_fpath+audio_clips[0],44100)
-print(audio_clips[0])
+tmp_1, sr = librosa.load(audio_fpath+audio_clips[2],44100)
+print(audio_clips[2])
 tmp_1 = tmp_1[:127890]
 X_1 = librosa.stft(tmp_1)
 Xdb_1 = librosa.amplitude_to_db(abs(X_1))

@@ -28,6 +28,9 @@ librosa.display.waveplot(x,sr=sr)
 n0 = 0 # Bắt đầu n0 = sr * t trong do t1 là thoi diem ma ong muốn bắt đầu xét
 n1 = 88200 # kết thúc
 plt.figure(figsize=(14,5))
+
+x[0:44100]
+
 plt.plot(x) # neu plt.plot(x) thi co nghia lay ca doan
 plt.grid()
 # Xac dinh so lan di qua 0 trong 1 khoang thoi gian

@@ -41,22 +41,7 @@ for index in range(0,len(audio_fpath_y)) :
         target_data = numpy.append(target_data,[index] * len(audio_fpath_z))
 
 
+numpy.save('dactrung/zcr/zcr.npy',data)
+numpy.save('dactrung/zcr/target_zcr.npy',target_data)
+
 print(data.shape)
-
-audio_fpath_1 = ('../audio_test/')  
-audio_clips_1 = os.listdir(audio_fpath_1)
-x, sr = librosa.load(audio_fpath_1+audio_clips_1[0],44100)
-print(audio_clips_1[0])
-x = x[:127890]
-tmp_1 = librosa.feature.zero_crossing_rate(x)[0]
-# tmp_1 = tmp_1[:250]
-test = numpy.array([tmp_1])
-
-clf = neighbors.KNeighborsClassifier(n_neighbors=5,p=2,weights='distance')
-clf.fit(data,target_data)
-y = clf.kneighbors(test)
-y_pred = clf.predict(test) # du doan lay nhan cua data moi
-
-print(y)
-print(y_pred)
-
