@@ -23,16 +23,15 @@ data = numpy.concatenate((data,data_3),axis=1)
 
 target_data_x = numpy.load('dactrung/zcr/target_zcr.npy')
 target_data = target_data_x
-# target_data_x = numpy.reshape(target_data_x,(1,125))
-target_data = numpy.concatenate((target_data,target_data_x),axis=0)
-target_data = numpy.concatenate((target_data,target_data_x),axis=0)
-
+# # target_data_x = numpy.reshape(target_data_x,(1,125))
+# target_data = numpy.concatenate((target_data,target_data_x),axis=0)
+# target_data = numpy.concatenate((target_data,target_data_x),axis=0)
 
 
 audio_fpath_1 = ('../audio_test/')  
 audio_clips_1 = os.listdir(audio_fpath_1)
-x, sr = librosa.load(audio_fpath_1+audio_clips_1[0],44100)
-print(audio_clips_1[0])
+x, sr = librosa.load(audio_fpath_1+audio_clips_1[2],44100)
+print(audio_clips_1[2])
 x = x[:127890]
 
 tmp_1 = librosa.feature.rms(x)[0]
@@ -48,28 +47,11 @@ test_3 = numpy.reshape(Xdb,(1,256250))
 test = test_1;
 test = numpy.concatenate((test,test_2),axis=1)
 test = numpy.concatenate((test,test_3),axis=1)
-# print(test_1.shape)
-# print(test_1)
-# print(test_2.shape)
-# print(test_2)
-# print(test_3.shape)
-# print(test_3)
-print(data_1)
-print(data_1.shape)
-print(data_2)
-print(data_2.shape)
-print(data_3)
-print(data_3.shape)
-print(data)
 
-# print(data.shape)
-# print(target_data)
-# print(test.shape)
-
-# clf = neighbors.KNeighborsClassifier(n_neighbors=6,p=2)
-# clf.fit(data,target_data)
-# y_1 = clf.kneighbors(test)
-# y_pred_1 = clf.predict(test)
-# print(y_1)
-# print(y_pred_1)
+clf = neighbors.KNeighborsClassifier(n_neighbors=6,p=2)
+clf.fit(data,target_data)
+y_1 = clf.kneighbors(test)
+y_pred_1 = clf.predict(test)
+print(y_1)
+print(y_pred_1)
 

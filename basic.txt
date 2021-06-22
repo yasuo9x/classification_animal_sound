@@ -1,1 +1,1 @@
-https://librosa.org/doc/0.6.3/glossary.html
+https://librosa.org/doc/main/glossary.html

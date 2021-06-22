@@ -9,7 +9,7 @@ import matplotlib
 import matplotlib.pyplot as plt
 import librosa
 import librosa.display
-import IPython.display as ipd
+import IPython.display as ipd 
 from sklearn import neighbors,datasets
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
@@ -20,15 +20,4 @@ data_3 = numpy.load('dactrung/spectrogram/spectrogram.npy')
 data = data_1
 data = numpy.concatenate((data,data_2),axis=1)
 data = numpy.concatenate((data,data_3),axis=1)
-
-target_data_x = numpy.load('dactrung/zcr/target_zcr.npy')
-target_data = target_data_x
-# target_data_x = numpy.reshape(target_data_x,(1,125))
-target_data = numpy.concatenate((target_data,target_data_x),axis=0)
-target_data = numpy.concatenate((target_data,target_data_x),axis=0)
-
-
-print(target_data)
-print(target_data.shape)
-print(target_data_x)
-print(target_data_x.shape)
+numpy.savetxt('dactrung/data_1.csv', data, delimiter=',')
