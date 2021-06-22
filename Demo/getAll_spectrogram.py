@@ -55,3 +55,4 @@ data = numpy.reshape(data,(len(target_data),256250))
 
 numpy.save('dactrung/spectrogram/spectrogram',data)
 numpy.save('dactrung/spectrogram/target_spectrogram',target_data)
+

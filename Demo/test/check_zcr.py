@@ -14,7 +14,7 @@ from sklearn import neighbors,datasets
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 
-audio_fpath_x = '../audio/'
+audio_fpath_x = '../../audio/'
 audio_fpath_y = os.listdir(audio_fpath_x)
 data = numpy.array([])
 target_data = numpy.array([])
@@ -43,7 +43,7 @@ for index in range(0,len(audio_fpath_y)) :
 
 print(data.shape)
 
-audio_fpath_1 = ('../audio_test/')  
+audio_fpath_1 = ('../../audio_test/')  
 audio_clips_1 = os.listdir(audio_fpath_1)
 x, sr = librosa.load(audio_fpath_1+audio_clips_1[0],44100)
 print(audio_clips_1[0])
@@ -52,7 +52,7 @@ tmp_1 = librosa.feature.zero_crossing_rate(x)[0]
 # tmp_1 = tmp_1[:250]
 test = numpy.array([tmp_1])
 
-clf = neighbors.KNeighborsClassifier(n_neighbors=5,p=2,weights='distance')
+clf = neighbors.KNeighborsClassifier(n_neighbors=10,p=2,weights='distance')
 clf.fit(data,target_data)
 y = clf.kneighbors(test)
 y_pred = clf.predict(test) # du doan lay nhan cua data moi

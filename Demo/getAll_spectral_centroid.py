@@ -27,7 +27,7 @@ for index in range(0,len(audio_fpath_y)) :
         x.append(tmp)
     zcrs = []
     for index_y in x :
-        tmp_y = librosa.feature.zero_crossing_rate(index_y)[0]
+        tmp_y = librosa.feature.spectral_centroid(index_y, sr=sr)[0]
 #        tmp = tmp[:250]
         zcrs.append(tmp_y)
     data_tmp = numpy.array(zcrs)
@@ -36,12 +36,9 @@ for index in range(0,len(audio_fpath_y)) :
     else :
         data = numpy.concatenate((data,data_tmp))
     if(target_data.size == 0 ) :
-        target_data = numpy.array([audio_fpath_y[index]] * len(audio_fpath_z))
+        target_data = numpy.array([index] * len(audio_fpath_z))
     else :
-        target_data = numpy.append(target_data,[audio_fpath_y[index]] * len(audio_fpath_z))
+        target_data = numpy.append(target_data,[index] * len(audio_fpath_z))
 
-
-numpy.save('dactrung/zcr/zcr.npy',data)
-numpy.save('dactrung/zcr/target_zcr.npy',target_data)
-
-
+numpy.save('dactrung/spectral_centroid/spectral_centroid.npy',data)
+numpy.save('dactrung/spectral_centroid/target_spectral_centroid.npy',target_data)
