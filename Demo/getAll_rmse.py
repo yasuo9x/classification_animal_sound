@@ -43,5 +43,3 @@ for index in range(0,len(audio_fpath_y)) :
 
 numpy.save('dactrung/rmse/rmse',data)
 numpy.save('dactrung/rmse/target_rmse',target_data)
-
-print(data.shape)

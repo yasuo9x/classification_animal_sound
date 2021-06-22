@@ -13,16 +13,7 @@ import IPython.display as ipd
 from sklearn import neighbors, datasets
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
-# audio_fpath = ('../audio/Bo/')
-# audio_fpath = ('../audio/CaSau/')
-# audio_fpath = ('../audio/ChoSoi/')
-# audio_fpath = ('../audio/Chuot/')
-# audio_fpath = ('../audio/Ho/')
-# audio_fpath = ('../audio/Huou/')
-# audio_fpath = ('../audio/Meo/')
-# audio_fpath = ('../audio/Ngựa/')
-# audio_fpath = ('../audio/Voi/')
-# audio_fpath = ('../audio/Vuon/')
+
 audio_fpath_x = '../audio/'
 audio_fpath_y = os.listdir(audio_fpath_x)
 data = numpy.array([])
@@ -69,7 +60,7 @@ test_1 = numpy.reshape(Xdb_1,(1,256250))
 clf = neighbors.KNeighborsClassifier(n_neighbors=10,p=2,weights='distance')
 clf.fit(data,target_data)
 y = clf.kneighbors(test_1)
-y_pred = clf.predict(test_1) # du doan lay nhan cua data moi
+y_pred = clf.predict(test_1)
 
 
 print(y)

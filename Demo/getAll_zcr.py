@@ -44,4 +44,3 @@ for index in range(0,len(audio_fpath_y)) :
 numpy.save('dactrung/zcr/zcr.npy',data)
 numpy.save('dactrung/zcr/target_zcr.npy',target_data)
 
-print(data.shape)

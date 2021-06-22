@@ -21,12 +21,7 @@ data = data_1
 data = numpy.concatenate((data,data_2),axis=1)
 data = numpy.concatenate((data,data_3),axis=1)
 
-target_data_x = numpy.load('dactrung/zcr/target_zcr.npy')
-target_data = target_data_x
-# # target_data_x = numpy.reshape(target_data_x,(1,125))
-# target_data = numpy.concatenate((target_data,target_data_x),axis=0)
-# target_data = numpy.concatenate((target_data,target_data_x),axis=0)
-
+target_data = numpy.load('dactrung/zcr/target_zcr.npy')
 
 audio_fpath_1 = ('../audio_test/')  
 audio_clips_1 = os.listdir(audio_fpath_1)
